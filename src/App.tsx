@@ -1,11 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route } from 'react-router';
 import './App.css';
 import Layout from './components/layout/Layout';
+import Home from './components/home/Home';
+import Recipes from './components/recipes/recipes/Recipes';
 
 const App: React.FC = () => {
   return (
-    <Layout></Layout>
+    <Layout>
+      <Route path='/' component={Home} />
+      <Route path='/recipes' component={Recipes} />
+      <Route path='/recipe/:id' component={Home} />
+    </Layout>
   );
 }
 
