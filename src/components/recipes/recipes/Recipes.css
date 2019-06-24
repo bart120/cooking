@@ -1,0 +1,11 @@
+.root{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: hidden;
+    background-color:aliceblue;
+  }
+  .gridList{
+    width: 500;
+    height: 450;
+  }
