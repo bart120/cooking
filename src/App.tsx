@@ -8,9 +8,9 @@ import Recipes from './components/recipes/recipes/Recipes';
 const App: React.FC = () => {
   return (
     <Layout>
-      <Route path='/' component={Home} />
+      <Route path='/' exact component={Home} />
       <Route path='/recipes' component={Recipes} />
-      <Route path='/recipe/:id' component={Home} />
+      <Route path='/recipe/:id/:name?' component={Home} />
     </Layout>
   );
 }

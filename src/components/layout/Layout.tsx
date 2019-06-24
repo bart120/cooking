@@ -14,13 +14,12 @@ export default class Layout extends React.Component {
     render = () => {
         return (
             <div>
-                <Header />
-                <Container className='Bar'>
-                    <Router history={browserHistory}>
+                <Router history={browserHistory}>
+                    <Header />
+                    <Container className='layout-fix'>
                         {this.props.children}
-                    </Router>
-                </Container>
-
+                    </Container>
+                </Router>
             </div>
         )
     };

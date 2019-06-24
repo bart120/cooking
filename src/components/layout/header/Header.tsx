@@ -1,8 +1,10 @@
 import React from "react";
 import AppBar from '@material-ui/core/AppBar';
 import { Toolbar, Typography, IconButton, Button } from "@material-ui/core";
+import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import './Header.css';
+
 // import { makeStyles, createStyles } from "@material-ui/styles";
 
 /* const usesStyles = makeStyles((theme: Theme) =>
@@ -11,10 +13,11 @@ import './Header.css';
             marginRight: theme.spacing(2)
         }
     }));*/
+    
 
 export default class Header extends React.Component {
 
-    
+
     render() {
         // const classes = usesStyles();
         return (
@@ -26,7 +29,10 @@ export default class Header extends React.Component {
                         </IconButton>
                         <Typography variant="h6" className="title">
                             Cooking
-                    </Typography>
+                        </Typography>
+                            <Link to="/">Home</Link>
+                            <Link to="/recipes">Recettes</Link>
+                        
                         <Button color="inherit">Login</Button>
                     </Toolbar>
 
