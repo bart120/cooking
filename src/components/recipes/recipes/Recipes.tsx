@@ -19,7 +19,7 @@ export default class Recipes extends Component {
     render() {
         return (
             <div className="root">
-                <GridList cellHeight={180} className="gridList">
+                <GridList cols={3} cellHeight={180} className="gridList">
                     {this.data.map((item, index) => (
                         <ItemRecipe item={item} />
                     ))}
