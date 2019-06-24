@@ -13,7 +13,7 @@ import './Header.css';
             marginRight: theme.spacing(2)
         }
     }));*/
-    
+
 
 export default class Header extends React.Component {
 
@@ -30,9 +30,12 @@ export default class Header extends React.Component {
                         <Typography variant="h6" className="title">
                             Cooking
                         </Typography>
-                            <Link to="/">Home</Link>
-                            <Link to="/recipes">Recettes</Link>
-                        
+                        <Link to="/">Home</Link>
+                        <Link to="/recipes">Recettes</Link>
+
+                        <Link to="/recipe/1/colombo-de-poulet">Recette 1</Link>
+                        <Link to="/recipe/2/chatrou">Recette 2</Link>
+
                         <Button color="inherit">Login</Button>
                     </Toolbar>
 
