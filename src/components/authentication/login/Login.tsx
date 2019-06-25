@@ -3,13 +3,17 @@ import { LoginModel } from '../../../models/LoginModel';
 import { IState } from '../../../models/IState';
 import { TextField, Checkbox, Button } from '@material-ui/core';
 import EmailField from '../../fields/EmailField';
+import UserService from '../../../services/UserService';
 
 
 interface LoginState extends LoginModel {
     rememberMe: boolean;
+    token?: string
 }
 
 export default class Login extends Component<{}, LoginState & IState> {
+
+    private service: UserService = new UserService();
 
     constructor(props: any) {
         super(props);
@@ -26,7 +30,17 @@ export default class Login extends Component<{}, LoginState & IState> {
 
     handleSubmit(e: any): void {
         e.preventDefault();
-        console.log(this.state);
+        //console.log(this.state);
+        this.service.login(this.state as LoginModel).then(
+            text => {
+                const data = JSON.parse(text);
+                console.log(data);
+                this.setState({ token: data.token });
+            }
+        ).catch(
+            err => alert(err)
+        );
+        console.log('apres service.login');
     }
 
     handleChange(e: any): void {
@@ -52,7 +66,9 @@ export default class Login extends Component<{}, LoginState & IState> {
                 <Checkbox checked={this.state.rememberMe} onChange={this.handleCheckChange} color="primary" />
                 <br />
                 <Button type="submit">OK</Button>
+                <p>{this.state.token}</p>
             </form>
+
         );
     }
 }
