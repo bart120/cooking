@@ -19,15 +19,11 @@ import './Header.css';
 class Header extends React.Component<RouteComponentProps> {
 
     loginOnclick(): void {
-        //const p: any = this.props;
-        //console.log(this.props.history);
         this.props.history.push('/login');
 
     }
 
     render() {
-        // const classes = usesStyles();
-        //console.log(this.props.history);
         return (
             <div className="root">
                 <AppBar color="default" >
