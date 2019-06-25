@@ -9,10 +9,12 @@ interface ItemRecipeProps {
 }
 
 export default class ItemRecipe extends Component<ItemRecipeProps> {
+
     render() {
         return (
             <GridListTile>
                 <img src={this.props.item.image} alt={this.props.item.name} className="img" />
+               
                 <GridListTileBar
                     title={this.props.item.name}
                     subtitle={<span>by: moi</span>}
