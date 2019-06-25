@@ -1,7 +1,7 @@
 import React from "react";
 import AppBar from '@material-ui/core/AppBar';
 import { Toolbar, Typography, IconButton, Button } from "@material-ui/core";
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import './Header.css';
 
@@ -16,12 +16,12 @@ import './Header.css';
     }));*/
 
 
-export default class Header extends React.Component {
+class Header extends React.Component<RouteComponentProps> {
 
     loginOnclick(): void {
         //const p: any = this.props;
         //console.log(this.props.history);
-        //this.props.history.push('/login');
+        this.props.history.push('/login');
 
     }
 
@@ -52,3 +52,5 @@ export default class Header extends React.Component {
         )
     };
 }
+
+export default withRouter(Header);
