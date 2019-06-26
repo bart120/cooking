@@ -1,7 +1,10 @@
 import { LoginModel } from "../models/LoginModel";
 import conf from '../conf';
 
-export default class UserService {
+import BaseService from "./BaseService";
+
+
+export default class UserService extends BaseService {
 
     login(model: LoginModel): Promise<any> {
 
@@ -11,8 +14,8 @@ export default class UserService {
             body: JSON.stringify({ login: 'sfont@exelcia-it.com', password: 'Wxcvbn123*' })
         }
         return fetch(conf.URL_TOKEN, requestOptions)
-            .then(resp => resp.text());
-        
+            .then(this.handleResponse);
+
     }
 
 }

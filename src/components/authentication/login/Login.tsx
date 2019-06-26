@@ -4,6 +4,9 @@ import { IState } from '../../../models/IState';
 import { TextField, Checkbox, Button } from '@material-ui/core';
 import EmailField from '../../fields/EmailField';
 import UserService from '../../../services/UserService';
+import ErrorModel from '../../../models/ErrorModel';
+import jwtDecode from 'jwt-decode';
+import UserModel from '../../../models/UserModel';
 
 
 interface LoginState extends LoginModel {
@@ -30,17 +33,19 @@ export default class Login extends Component<{}, LoginState & IState> {
 
     handleSubmit(e: any): void {
         e.preventDefault();
-        //console.log(this.state);
         this.service.login(this.state as LoginModel).then(
-            text => {
-                const data = JSON.parse(text);
-                console.log(data);
-                this.setState({ token: data.token });
+            data => {
+                const token = data.token;
+                const decoded: any = jwtDecode(token);
+                const user: UserModel = { token: token, login: decoded.login, admin: decoded.admin };
+
+                sessionStorage.setItem('USER', JSON.stringify(user));
+                // console.log(data);
+                // this.setState({ token: data.token });
             }
         ).catch(
-            err => alert(err)
+            (err: ErrorModel) => alert(err.message)
         );
-        console.log('apres service.login');
     }
 
     handleChange(e: any): void {
