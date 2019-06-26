@@ -1,5 +1,8 @@
 export interface RecipeModel {
-    id: number;
+    _id: number;
     name: string;
+    createdAt: Date;
+    difficulty: string;
+    duration: number;
     image?: string;
 } 

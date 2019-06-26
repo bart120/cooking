@@ -7,6 +7,7 @@ import UserService from '../../../services/UserService';
 import ErrorModel from '../../../models/ErrorModel';
 import jwtDecode from 'jwt-decode';
 import UserModel from '../../../models/UserModel';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 
 interface LoginState extends LoginModel {
@@ -14,7 +15,7 @@ interface LoginState extends LoginModel {
     token?: string
 }
 
-export default class Login extends Component<{}, LoginState & IState> {
+class Login extends Component<RouteComponentProps, LoginState & IState> {
 
     private service: UserService = new UserService();
 
@@ -37,11 +38,9 @@ export default class Login extends Component<{}, LoginState & IState> {
             data => {
                 const token = data.token;
                 const decoded: any = jwtDecode(token);
-                const user: UserModel = { token: token, login: decoded.login, admin: decoded.admin };
-
-                sessionStorage.setItem('USER', JSON.stringify(user));
-                // console.log(data);
-                // this.setState({ token: data.token });
+                alert(`Bienvenue ${decoded.login}`);
+                this.props.history.push('/recipes');
+                //sessionStorage.setItem('USER', JSON.stringify(user));
             }
         ).catch(
             (err: ErrorModel) => alert(err.message)
@@ -77,3 +76,5 @@ export default class Login extends Component<{}, LoginState & IState> {
         );
     }
 }
+
+export default withRouter(Login);
