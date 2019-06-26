@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { RecipeModel } from '../../../models/RecipeModel';
 import { GridListTile, GridListTileBar, IconButton } from '@material-ui/core';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
 import './ItemRecipe.css';
 
@@ -8,23 +9,30 @@ interface ItemRecipeProps {
     item: RecipeModel;
 }
 
-export default class ItemRecipe extends Component<ItemRecipeProps> {
+class ItemRecipe extends Component<ItemRecipeProps & RouteComponentProps> {
+
+    detail(id: string): void {
+        this.props.history.push(`/recipe/${id}`);
+    }
 
     render() {
         return (
             <GridListTile>
-                <img src={this.props.item.image} alt={this.props.item.name} className="img" />
-               
+                <img src="/images/recipe.png" alt={this.props.item.name} className="img" />
+
                 <GridListTileBar
                     title={this.props.item.name}
                     subtitle={<span>by: moi</span>}
                     actionIcon={
-                        <IconButton aria-label={`info about ${this.props.item.name}`} className="icon">
+                        <IconButton onClick={() => this.detail(this.props.item._id)} aria-label={`info about ${this.props.item.name}`} className="icon">
                             <InfoIcon />
                         </IconButton>
                     }
                 />
+
             </GridListTile>
         );
     }
 }
+
+export default withRouter(ItemRecipe);

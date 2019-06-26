@@ -27,6 +27,7 @@ export default class BaseService {
                 error.message = (data && data.message) || resp.statusText;
                 if (resp.status === 401) {
                     error.code = '401';
+                    console.log(error.code);
                 }
 
                 if (resp.status === 404) {
