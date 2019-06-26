@@ -4,6 +4,8 @@ import { Toolbar, Typography, IconButton, Button } from "@material-ui/core";
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import './Header.css';
+import UserService from "../../../services/UserService";
+import UserModel from "../../../models/UserModel";
 
 
 // import { makeStyles, createStyles } from "@material-ui/styles";
@@ -15,8 +17,21 @@ import './Header.css';
         }
     }));*/
 
+interface HeaderState {
+    user?: any;
+}
 
-class Header extends React.Component<RouteComponentProps> {
+class Header extends React.Component<RouteComponentProps, HeaderState> {
+
+    constructor(props: any) {
+        super(props);
+        this.state = {};
+        UserService.user.then(
+            (data: UserModel) => {
+                this.setState({ user: data });
+            }
+        )
+    }
 
     loginOnclick(): void {
         this.props.history.push('/login');
@@ -24,7 +39,9 @@ class Header extends React.Component<RouteComponentProps> {
     }
 
     render() {
+        const isLogged: Boolean = (this.state.user != null);
         return (
+
             <div className="root">
                 <AppBar color="default" >
                     <Toolbar>
@@ -39,8 +56,11 @@ class Header extends React.Component<RouteComponentProps> {
 
                         <Link to="/recipe/1/colombo-de-poulet">Recette 1</Link>
                         <Link to="/recipe/2/chatrou">Recette 2</Link>
-
-                        <Button color="inherit" onClick={this.loginOnclick.bind(this)}>Login</Button>
+                        {isLogged ? (
+                            <span>Bonjour {this.state.user.login}</span>
+                        ) : (
+                                <Button color="inherit" onClick={this.loginOnclick.bind(this)}>Login</Button>
+                            )}
                     </Toolbar>
 
                 </AppBar >

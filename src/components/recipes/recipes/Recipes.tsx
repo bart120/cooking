@@ -39,7 +39,7 @@ export default class Recipes extends Component<{}, RecipesState> {
             <div className="root">
                 <GridList cols={3} cellHeight={180} className="gridList">
                     {this.state.recipes.map((item, index) => (
-                        <ItemRecipe item={item} />
+                        <ItemRecipe item={item} key={item._id} />
                     ))}
                 </GridList>
             </div>

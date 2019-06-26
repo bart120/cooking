@@ -8,6 +8,16 @@ import UserModel from "../models/UserModel";
 
 export default class UserService extends BaseService {
 
+    static user: Promise<UserModel> = new Promise<UserModel>(UserService.executePromise);
+
+    private static executePromise(resolve: any, reject: any) {
+        if (sessionStorage.getItem('USER')) {
+            resolve(JSON.parse(sessionStorage.getItem('USER') as string));
+        } else {
+            reject({ message: 'utilisateur déconnecté' });
+        }
+    }
+
     login(model: LoginModel): Promise<any> {
 
         const requestOptions: RequestInit = {
@@ -23,6 +33,7 @@ export default class UserService extends BaseService {
                 const user: UserModel = { token: token, login: decoded.login, admin: decoded.admin };
 
                 sessionStorage.setItem('USER', JSON.stringify(user));
+
                 // console.log(data);
                 // this.setState({ token: data.token });
                 return data;
